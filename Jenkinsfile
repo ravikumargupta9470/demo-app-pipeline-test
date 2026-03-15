@@ -1,11 +1,17 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "ravikumargupta9470/demo-app"
+    tools {
+        maven 'mvn'
     }
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/ravikumargupta9470/demo-app-pipeline-test.git'
+            }
+        }
 
         stage('Build') {
             steps {
@@ -15,24 +21,14 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat "docker build -t %IMAGE_NAME%:latest ."
+                bat 'docker build -t ravikumargupta9470/demo-app .'
             }
         }
 
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    bat "echo %PASS% | docker login -u %USER% --password-stdin"
-                    bat "docker push %IMAGE_NAME%:latest"
-                }
+                bat 'docker push ravikumargupta9470/demo-app'
             }
         }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                bat "kubectl apply -f deployment.yaml"
-            }
-        }
-
     }
 }
