@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: ravikumargupta9470/springboot-app:v1
+          image: ravikumargupta9470/demo-app:v1
           ports:
             - containerPort: 5000
