@@ -3,13 +3,13 @@ pipeline {
 
     environment {
         DOCKER_HUB_CRED = credentials('dockerhub-cred')
-        IMAGE_NAME = "yourusername/springboot-hello"
+        IMAGE_NAME = "ravikumargupta9470/demo-app"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/yourusername/springboot-hello.git'
+                git 'https://github.com/ravikumargupta9470/demo-app-pipeline-test.git'
             }
         }
 
