@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-deployment
+  name: springboot-demo-app-test1
 spec:
   replicas: 1
   selector:
